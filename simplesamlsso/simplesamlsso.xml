@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="utf-8"?> 
+<extension version="3.3" type="plugin" group="authentication" method="upgrade">
+    <name>PLG_SIMPLESAMLSSO</name>
+    <element>simplesamlsso</element>
+    <author>Jonathan Richardson</author>
+    <authorEmail>info@oldskoolhouse.co.uk</authorEmail>
+    <authorUrl>https://oldskoolhouse.org.uk</authorUrl>
+    <creationDate>April 2020</creationDate>
+    <copyright>Copyright (C) 2020 Jonathan Richardson. All rights reserved.</copyright>
+    <license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+    <version>1.3.2</version>
+    <description>PLG_SIMPLESAMLSSO_DESCRIPTION</description>
+    <files>
+        <filename plugin="simplesamlsso">simplesamlsso.php</filename>
+        <folder>language</folder>
+    </files>
+    <languages folder="language">
+        <language tag="en-GB">en-GB/en-GB.plg_authentication_simplesamlsso.ini</language>
+        <language tag="en-GB">en-GB/en-GB.plg_authentication_simplesamlsso.sys.ini</language>
+    </languages>
+    <config>
+        <fields name="params">
+						
+            <fieldset name="options">
+                <field name="simplesaml_config" type="note"
+                       label="PLG_SIMPLESAML_CONFIG_LABEL"
+                       description="PLG_SIMPLESAML_CONFIG_DESC"
+                       size="40"                                   
+                />
+                <field name="simplesaml_authsource" type="text"
+                       label="PLG_SIMPLESAML_AUTHSOURCE_LABEL"
+                       description="PLG_SIMPLESAML_AUTHSOURCE_DESC"
+                       size="40"
+                       default="default-sp"
+                />
+                <field name="simplesaml_autocreate" type="radio"
+                       label="PLG_SIMPLESAML_AUTOCREATE_LABEL"
+                       description="PLG_SIMPLESAML_AUTOCREATE_DESC"
+                       default="0"
+                       filter="integer"
+                       class="btn-group btn-group-yesno"
+                >
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </field>
+                <field name="simplesaml_updateuser" type="radio"
+                       label="PLG_SIMPLESAML_UPDATEUSER_LABEL"
+                       description="PLG_SIMPLESAML_UPDATEUSER_DESC"
+                       default="0" 
+                       filter="integer"
+                       class="btn-group btn-group-yesno"
+                >
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </field>
+                <field name="simplesaml_slo" type="radio"
+                       label="PLG_SIMPLESAML_SLO_LABEL"
+                       description="PLG_SIMPLESAML_SLO_DESC"
+                       default="0"
+                       filter="integer"
+                       class="btn-group btn-group-yesno"
+                >
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </field>
+                <field name="simplesaml_account_matcher" type="radio"
+                       label="PLG_SIMPLESAML_ACCOUNT_MATCHER_LABEL"
+                       description="PLG_SIMPLESAML_ACCOUNT_MATCHER_DESC"
+                       default="username"
+                       class="btn-group"
+                >
+                    <option value="username">Username</option>
+                    <option value="mail">E-Mail</option>
+                </field>
+                <field
+                    name="simplesaml_backendlogin"
+                    type="radio"
+                    label="PLG_SIMPLESAML_BACKEND_LOGIN_LABEL"
+                    description="PLG_SIMPLESAML_BACKEND_LOGIN_DESC"
+                    default="0"
+                    filter="integer"
+                    class="btn-group btn-group-yesno"
+                >
+                    <option value="1">JENABLED</option>
+                    <option value="0">JDISABLED</option>
+                </field>
+            </fieldset>
+            <fieldset name="attrs_mapping">
+                <field name="simplesaml_attr_mapping_name" type="text"
+                       label="PLG_SIMPLESAML_ATTR_MAPPING_NAME_LABEL"
+                       description="PLG_SIMPLESAML_ATTR_MAPPING_NAME_DESC"
+                       size="40"
+                       default=""
+                />
+                <field name="simplesaml_attr_mapping_username" type="text"
+                       label="PLG_SIMPLESAML_ATTR_MAPPING_USERNAME_LABEL"
+                       description="PLG_SIMPLESAML_ATTR_MAPPING_USERNAME_DESC"
+                       size="40"
+                       default=""
+                />
+                <field name="simplesaml_attr_mapping_mail" type="text"
+                       label="PLG_SIMPLESAML_ATTR_MAPPING_MAIL_LABEL"
+                       description="PLG_SIMPLESAML_ATTR_MAPPING_MAIL_DESC"
+                       size="40"
+                       default=""
+                />
+                <field name="simplesaml_attr_mapping_groups" type="text"
+                       label="PLG_SIMPLESAML_ATTR_MAPPING_GROUPS_LABEL"
+                       description="PLG_SIMPLESAML_ATTR_MAPPING_GROUPS_DESC"
+                       size="40"
+                       default=""
+                />
+            </fieldset>
+            <fieldset name="group_mapping">
+                <field name="group1" type="usergroup"
+                       label="Group1"
+                       multiple="false"
+                />
+                <field name="group1_map" type="text"
+                       label="Group1 Mapping"
+                       size="40"
+                       default=""
+                />
+                <field name="group2" type="usergroup"
+                       label="Group2"
+                       multiple="false"
+                />
+                <field name="group2_map" type="text"
+                       label="Group2 Mapping"
+                       size="40"
+                       default=""
+                />
+                <field name="group3" type="usergroup"
+                       label="Group3"
+                       multiple="false"
+                />
+                <field name="group3_map" type="text"
+                       label="Group3 Mapping"
+                       size="40"
+                       default=""
+                />
+                <field name="group4" type="usergroup"
+                       label="Group4"
+                       multiple="false"
+                />
+                <field name="group4_map" type="text"
+                       label="Group4 Mapping"
+                       size="40"
+                       default=""
+                />
+                <field name="group5" type="usergroup"
+                       label="Group5"
+                       multiple="false"
+                />
+                <field name="group5_map" type="text"
+                       label="Group5 Mapping"
+                       size="40"
+                       default=""
+                />
+                <field name="group6" type="usergroup"
+                       label="Group6"
+                       multiple="false"
+                />
+                <field name="group6_map" type="text"
+                       label="Group6 Mapping"
+                       size="40"
+                       default=""
+                />
+                <field name="group7" type="usergroup"
+                       label="Group7"
+                       multiple="false"
+                />
+                <field name="group7_map" type="text"
+                       label="Group7 Mapping"
+                       size="40"
+                       default=""
+                />
+                <field name="group8" type="usergroup"
+                       label="Group8"
+                       multiple="false"
+                />
+                <field name="group8_map" type="text"
+                       label="Group8 Mapping"
+                       size="40"
+                       default=""
+                />
+                <field name="group9" type="usergroup"
+                       label="Group9"
+                       multiple="false"
+                />
+                <field name="group9_map" type="text"
+                       label="Group9 Mapping"
+                       size="40"
+                       default=""
+                />
+                <field name="group10" type="usergroup"
+                       label="Group10"
+                       multiple="false"
+                />
+                <field name="group10_map" type="text"
+                       label="Group10 Mapping"
+                       size="40"
+                       default=""
+                />
+                <field name="group11" type="usergroup"
+                       label="Group11"
+                       multiple="false"
+                />
+                <field name="group11_map" type="text"
+                       label="Group11 Mapping"
+                       size="40"
+                       default=""
+                />
+                <field name="group12" type="usergroup"
+                       label="Group12"
+                       multiple="false"
+                />
+                <field name="group12_map" type="text"
+                       label="Group12 Mapping"
+                       size="40"
+                       default=""
+                />
+                <field name="group13" type="usergroup"
+                       label="Group13"
+                       multiple="false"
+                />
+                <field name="group13_map" type="text"
+                       label="Group13 Mapping"
+                       size="40"
+                       default=""
+                />
+                <field name="group14" type="usergroup"
+                       label="Group14"
+                       multiple="false"
+                />
+                <field name="group14_map" type="text"
+                       label="Group14 Mapping"
+                       size="40"
+                       default=""
+                />
+                <field name="group15" type="usergroup"
+                       label="Group15"
+                       multiple="false"
+                />
+                <field name="group15_map" type="text"
+                       label="Group15 Mapping"
+                       size="40"
+                       default=""
+                />
+                <field name="group16" type="usergroup"
+                       label="Group16"
+                       multiple="false"
+                />
+                <field name="group16_map" type="text"
+                       label="Group16 Mapping"
+                       size="40"
+                       default=""
+                />
+                <field name="group17" type="usergroup"
+                       label="Group17"
+                       multiple="false"
+                />
+                <field name="group17_map" type="text"
+                       label="Group17 Mapping"
+                       size="40"
+                       default=""
+                />
+                <field name="group18" type="usergroup"
+                       label="Group18"
+                       multiple="false"
+                />
+                <field name="group18_map" type="text"
+                       label="Group18 Mapping"
+                       size="40"
+                       default=""
+                />
+                <field name="group19" type="usergroup"
+                       label="Group19"
+                       multiple="false"
+                />
+                <field name="group19_map" type="text"
+                       label="Group19 Mapping"
+                       size="40"
+                       default=""
+                />
+                <field name="group20" type="usergroup"
+                       label="Group20"
+                       multiple="false"
+                />
+                <field name="group20_map" type="text"
+                       label="Group20 Mapping"
+                       size="40"
+                       default=""
+                />
+            </fieldset>
+			
+        </fields>
+    </config>
+</extension>
