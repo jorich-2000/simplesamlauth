@@ -1,24 +1,21 @@
 <?php
 
 /**
- * @package    simplesamlJoomla
- * @subpackage Plugins
+ * @package    SimpleSAMLAuth.Administrator
+ * @subpackage SimpleSAMLsso
  * @license    GNU/GPLv3
  * @copyright  Copyright 2020 Jonathan Richardson. All Rights Reserved.
  *
- *
- * This file is part of the SimpleSAMLphp Joomla plugin.
- *
- * The SimpleSAMLphp Joomla plugin is free software: you can redistribute it 
+ * The SimpleSAMLAuth package is free software: you can redistribute it 
  * and/or modify it under the terms of the GNU General Public License as 
  * published by the Free Software Foundation, either version 3 of the License, 
  * or (at your option) any later version.
  * 
- * The SimpleSAMLphp Joomla plugin is distributed in the hope that it will be 
+ * The SimpleSAMLAuth package is distributed in the hope that it will be 
  * useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- *
+ * 
  * You should have received a copy of the GNU General Public License
  * along with miniOrange SAML plugin.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -26,7 +23,7 @@ defined('_JEXEC') or die;
 $simplesaml_idp_slo = '';
 
 /**
- * SimpleSAML Authentication Plugin
+ * Single Sign On using SimpleSAML Authentication.Plugin
  *
  */
 class plgauthenticationsimplesamlsso extends JPlugin {
@@ -51,8 +48,6 @@ class plgauthenticationsimplesamlsso extends JPlugin {
             return;
         }
 
-        $success = false;
-
         // check simplesaml config variable is set  
         $config_dir = filter_input(INPUT_SERVER, 'SIMPLESAMLPHP_CONFIG_DIR', FILTER_SANITIZE_STRING);
         if (!isset($config_dir)) {
@@ -67,25 +62,18 @@ class plgauthenticationsimplesamlsso extends JPlugin {
             // $saml_auth->login();   
             $as = new \SimpleSAML\Auth\Simple($this->params->get('simplesaml_authsource', 'default-sp'));
 
-            // set the logout url as a session variable if it is required 
-            if ($this->params->get('simplesaml_slo')) {
-                $_SESSION['simplesaml_idp_slo'] = $as->getLogoutURL($URL_AFTER_LOGOUT);
-            } else {
-                $_SESSION['simplesaml_idp_slo'] = '';
-            }
-
             // Do the SSO login
             $as->requireAuth();
 
             jimport('joomla.user.authentication');
-            $authenticate = JAuthentication::getInstance();
+           // $authenticate = JAuthentication::getInstance();
             $response = new JAuthenticationResponse();
 
             if (!$as->isAuthenticated()) {
                 $errors = $as->getErrors();
                 $response->type = 'simplesaml';
                 $response->status = JAuthentication::STATUS_FAILURE;
-                $response->error_message = 'NOT_AUTHENTICATED';
+                $response->error_message = 'NOT_AUTHENTICATED' . ': ' . $errors;
             }
             $attrs = $as->getAttributes();
 

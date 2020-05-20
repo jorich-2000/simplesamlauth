@@ -8,7 +8,7 @@
     <creationDate>April 2020</creationDate>
     <copyright>Copyright (C) 2020 Jonathan Richardson. All rights reserved.</copyright>
     <license>GNU General Public License version 2 or later; see LICENSE.txt</license>
-    <version>1.3.2</version>
+    <version>1.3.4</version>
     <description>PLG_SIMPLESAMLSSO_DESCRIPTION</description>
     <files>
         <filename plugin="simplesamlsso">simplesamlsso.php</filename>
